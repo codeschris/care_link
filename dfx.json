@@ -1,0 +1,12 @@
+{
+    "canisters": {
+        "care_link": {
+            "type": "custom",
+            "build": "npx azle care_link",
+            "root": "src",
+            "ts": "src/index.ts",
+            "candid": "src/index.did",
+            "wasm": ".azle/care_link/care_link.wasm.gz"
+        }
+    }
+}

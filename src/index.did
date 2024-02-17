@@ -1,0 +1,62 @@
+type Patient = record {
+  id : text;
+  age : nat64;
+  dateOfBirth : text;
+  name : text;
+  createdDate : nat64;
+  updatedAt : opt nat64;
+  medicalHistory : vec text;
+  gender : text;
+  contactNumber : text;
+  treatments : vec text;
+};
+type PatientPayload = record {
+  age : nat64;
+  dateOfBirth : text;
+  name : text;
+  gender : text;
+  contactNumber : text;
+};
+type Treatment = record {
+  id : text;
+  duration : text;
+  patientId : text;
+  date : text;
+  createdDate : nat64;
+  treatingDoctor : text;
+  instructions : text;
+  updatedAt : opt nat64;
+  medications : vec text;
+};
+type TreatmentPayload = record {
+  duration : text;
+  patientId : text;
+  date : text;
+  treatingDoctor : text;
+  instructions : text;
+  medications : vec text;
+};
+type _AzleResult = variant { Ok : Patient; Err : text };
+type _AzleResult_1 = variant { Ok : Treatment; Err : text };
+type _AzleResult_2 = variant { Ok : vec Patient; Err : text };
+type _AzleResult_3 = variant { Ok : vec Treatment; Err : text };
+service : () -> {
+  addPatient : (PatientPayload) -> (_AzleResult);
+  addTreatment : (TreatmentPayload) -> (_AzleResult_1);
+  deletePatient : (text) -> (_AzleResult);
+  deleteTreatment : (text) -> (_AzleResult_1);
+  getInitialPatients : () -> (_AzleResult_2) query;
+  getPatient : (text) -> (_AzleResult) query;
+  getPatientByContactNumber : (text) -> (_AzleResult_2) query;
+  getPatients : () -> (_AzleResult_2) query;
+  getPatientsByName : () -> (_AzleResult_2) query;
+  getTreatment : (text) -> (_AzleResult_1) query;
+  getTreatments : () -> (_AzleResult_3) query;
+  getTreatmentsByPatient : (text) -> (_AzleResult_3) query;
+  insertMedicalHistory : (text, text) -> (_AzleResult);
+  insertTreatmentToPatient : (text, text) -> (_AzleResult);
+  loadMorePatients : (float64, float64) -> (_AzleResult_2) query;
+  searchPatients : (text) -> (_AzleResult_2) query;
+  updatePatient : (text, PatientPayload) -> (_AzleResult);
+  updateTreatment : (text, TreatmentPayload) -> (_AzleResult_1);
+}
